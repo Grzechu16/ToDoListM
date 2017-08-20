@@ -50,18 +50,10 @@ public class ToDoAdapter extends ArrayAdapter<ToDoTask> {
             toDoHolder.rowDate = (TextView) view.findViewById(R.id.rowDate);
             toDoHolder.rowIsDone = (CheckBox) view.findViewById(R.id.rowCheckBoxDone);
             toDoHolder.rowIsDone.setTag(view);
-            toDoHolder.rowIsDone.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-                    View view = (View) compoundButton.getTag();
-                    if (checked) {
-                        view.setBackgroundColor(Color.parseColor("#8FE370"));
-                    } else
-                        view.setBackgroundColor(Color.WHITE);
-                }
-            });
+            toDoHolder.rowIsDone.setOnCheckedChangeListener(checkBoxListener);
 
             view.setTag(toDoHolder);
+
         } else {
             toDoHolder = (ToDoHolder) view.getTag();
         }
@@ -81,4 +73,16 @@ public class ToDoAdapter extends ArrayAdapter<ToDoTask> {
         TextView rowDate;
         CheckBox rowIsDone;
     }
+
+    CompoundButton.OnCheckedChangeListener checkBoxListener = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+            View view = (View) compoundButton.getTag();
+            if (checked) {
+                view.setBackgroundColor(Color.parseColor("#8FE370"));
+            } else
+                view.setBackgroundColor(Color.WHITE);
+        }
+    };
+
 }

@@ -37,9 +37,7 @@ public class AddToDoTask extends AppCompatActivity {
         Button buttonDate = (Button) findViewById(R.id.buttonDate);
         Button button = (Button) findViewById(R.id.buttonAddTask);
 
-
-        InputMethodManager keyboard = (InputMethodManager) getSystemService(getApplicationContext().INPUT_METHOD_SERVICE);
-        keyboard.showSoftInput(editTextTitle, InputMethodManager.SHOW_IMPLICIT);
+        showKeyboard(editTextTitle);
 
         buttonDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,18 +50,15 @@ public class AddToDoTask extends AppCompatActivity {
 
                 DatePickerDialog datePickerDialog = new DatePickerDialog(AddToDoTask.this, listener, year, month, day);
                 datePickerDialog.show();
-
-
             }
         });
         listener = new DatePickerDialog.OnDateSetListener() {
-
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 String date = String.valueOf(day) + "/" + String.valueOf(month) + "/" + String.valueOf(year);
                 textViewDate.setText(date);
                 textViewDate.requestLayout();
-
+                hideKeyboard();
             }
         };
         button.setOnClickListener(new View.OnClickListener() {
@@ -73,12 +68,22 @@ public class AddToDoTask extends AppCompatActivity {
                 intent.putExtra("title", editTextTitle.getText().toString());
                 intent.putExtra("description", editTextDesc.getText().toString());
                 intent.putExtra("date", textViewDate.getText());
-                intent.putExtra("done",isDone);
+                intent.putExtra("done", isDone);
                 setResult(1, intent);
                 finish();
             }
         });
 
+    }
+
+    public void showKeyboard(View view) {
+        InputMethodManager keyboard = (InputMethodManager) getSystemService(getApplicationContext().INPUT_METHOD_SERVICE);
+        keyboard.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+    }
+
+    public void hideKeyboard() {
+        InputMethodManager keyboard = (InputMethodManager) getSystemService(getApplicationContext().INPUT_METHOD_SERVICE);
+        keyboard.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
     }
 
 }
