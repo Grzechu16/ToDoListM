@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ToDoListM</string>
+    <string name="add_task">Add Task</string>
+    <string name="specify_task">Specify task:</string>
+    <string name="description">Description</string>
+    <string name="type_here_hint">Type here</string>
+    <string name="title_of_your_task">Title of your task:</string>
+    <string name="set_date_button">Set date</string>
+    <string name="is_done">Is done?</string>
+    <string name="dd_mm_yyyy">dd/mm/yyyy</string>
+    <string name="add_task_button">Add Task</string>
+</resources>
